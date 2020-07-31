@@ -1,31 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.gonchar</groupId>
-  <artifactId>leetcode</artifactId>
-  <version>1.0-SNAPSHOT</version>
+    <groupId>org.gonchar</groupId>
+    <artifactId>leetcode</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
-  <name>leetcode</name>
+    <name>leetcode</name>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>11</java.version>
-    <!-- dependencies versions -->
-    <junit.jupiter.verstion>5.6.2</junit.jupiter.verstion>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>11</maven.compiler.release>
+        <!-- dependencies versions -->
+        <junit.jupiter.verstion>5.6.2</junit.jupiter.verstion>
+    </properties>
 
-  <dependencies>
+    <dependencies>
 
-    <!-- Test dependencies -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${junit.jupiter.verstion}</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.jupiter.verstion}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
