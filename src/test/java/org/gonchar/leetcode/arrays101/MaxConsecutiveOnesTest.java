@@ -2,6 +2,13 @@ package org.gonchar.leetcode.arrays101;
 
 import org.junit.jupiter.api.Test;
 
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -44,5 +51,35 @@ class MaxConsecutiveOnesTest {
     void severalSeries() {
         assertEquals(5, solution.findMaxConsecutiveOnes(
                 new int[]{0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0}));
+    }
+
+    @Test
+    void bigArray() {
+        int[] input = fromFile("arrayWith23Ones.txt");
+        assertEquals(23, solution.findMaxConsecutiveOnes(input));
+    }
+
+    private int[] fromFile(String filename) {
+        try {
+            URL url = getClass().getResource(filename);
+            System.out.println(url);
+            Path path = Paths.get(url.toURI());
+            Scanner scanner = new Scanner(path).useDelimiter("");
+            List<Integer> sequence = new ArrayList<>();
+            while (scanner.hasNext()) {
+                sequence.add(scanner.nextInt());
+            }
+            return toArray(sequence);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private int[] toArray(List<Integer> sequence) {
+        int[] intArray = new int[sequence.size()];
+        for (int i = 0; i < sequence.size(); i++) {
+            intArray[i] = sequence.get(i);
+        }
+        return intArray;
     }
 }
