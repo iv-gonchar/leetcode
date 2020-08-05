@@ -12,6 +12,42 @@ package org.gonchar.leetcode.arrays101;
 public class MaxConsecutiveOnes {
 
     public int findMaxConsecutiveOnes(int[] nums) {
-        return 0;
+        validateInput(nums);
+        int maxSeries = 0;
+        int currentSeries = 0;
+        int prev = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int curr = nums[i];
+            if (curr == 0) {
+                if (currentSeries > maxSeries) {
+                    maxSeries = currentSeries;
+                }
+                prev = curr;
+                currentSeries = 0;
+                continue;
+            }
+            if (prev == 0) {
+                currentSeries = 1;
+            } else {
+                currentSeries++;
+            }
+            prev = curr;
+        }
+        // when nums ends with ones series
+        if (currentSeries > maxSeries) {
+            maxSeries = currentSeries;
+        }
+        return maxSeries;
+    }
+
+    private void validateInput(int[] nums) {
+        if (nums == null) {
+            throw new NullPointerException("Input should not be null");
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0 && nums[i] != 1) {
+                throw new IllegalArgumentException("Input should contain only 0 and 1");
+            }
+        }
     }
 }

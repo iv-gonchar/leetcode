@@ -23,6 +23,12 @@ class MaxConsecutiveOnesTest {
     }
 
     @Test
+    void wrongInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> solution.findMaxConsecutiveOnes(new int[]{0, 1, 2}));
+        assertEquals("Input should contain only 0 and 1", exception.getMessage());
+    }
+
+    @Test
     void emptyArrayInput() {
         assertEquals(0, solution.findMaxConsecutiveOnes(new int[]{}));
     }
