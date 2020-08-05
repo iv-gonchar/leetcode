@@ -15,23 +15,15 @@ public class MaxConsecutiveOnes {
         validateInput(nums);
         int maxSeries = 0;
         int currentSeries = 0;
-        int prev = 0;
         for (int i = 0; i < nums.length; i++) {
-            int curr = nums[i];
-            if (curr == 0) {
+            if (nums[i] == 0) {
                 if (currentSeries > maxSeries) {
                     maxSeries = currentSeries;
                 }
-                prev = curr;
                 currentSeries = 0;
-                continue;
-            }
-            if (prev == 0) {
-                currentSeries = 1;
             } else {
                 currentSeries++;
             }
-            prev = curr;
         }
         // when nums ends with ones series
         if (currentSeries > maxSeries) {
