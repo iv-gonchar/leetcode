@@ -11,8 +11,45 @@ package org.gonchar.leetcode.interview;
 public class MergeTwoSortedLists {
 
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        // if first is empty than result is second list regardless it's empty or not
+        if (l1 == null) {
+            return l2;
+        }
+        // the same here with second list
+        if (l2 == null) {
+            return l1;
+        }
 
-        return new ListNode();
+        ListNode current = null;
+        ListNode head = null;
+        ListNode prev = null;
+        // here both lists are not empty, so we'll have at least 1 node in result
+
+        // each iteration we should move either pointer of l1 or l2
+        // iterations should finish when both l1 and l2 pointers point to null
+        while (l1 != null || l2 != null) {
+            // we should add smaller value to result or value from l1, if values are equal
+            int value1 = l1 != null ? l1.val : Integer.MAX_VALUE;
+            int value2 = l2 != null ? l2.val : Integer.MAX_VALUE;
+            if (value1 <= value2) { // take node from 1st list
+                current = l1;
+                l1 = l1.next;
+            } else { // take node from 2nd list
+                current = l2;
+                l2 = l2.next;
+            }
+
+            // if it is first node than assign it ot head
+            if (head == null) {
+                head = current;
+            // link current value to previous; prev won't be null as it will be initialized when 1st node is found
+            } else {
+                prev.next = current;
+            }
+
+            prev = current;
+        }
+        return head;
     }
 
 }
