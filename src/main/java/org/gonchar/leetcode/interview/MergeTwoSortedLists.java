@@ -50,7 +50,7 @@ class ListNode {
         // remove all spaces if present
         String cleanedList = list.replaceAll("\\s+", "");
         // remove leading and trailing square brackets
-        String elements = cleanedList.substring(1, cleanedList.length() - 2);
+        String elements = cleanedList.substring(1, cleanedList.length() - 1);
         String[] elementsArray = elements.split(",");
 
         int firstElement = Integer.valueOf(elementsArray[0]).intValue();
@@ -92,12 +92,11 @@ class ListNode {
         if (!other.getClass().equals(ListNode.class)) {
             return false;
         }
-        ListNode otherList = (ListNode) other;
+        ListNode currentOther = (ListNode) other;
         ListNode currentThis = this;
-        ListNode currentOther = otherList;
         while (currentThis != null || currentOther != null) {
             int thisCurrentElement = currentThis.val;
-            int otherCurrentElement = otherList.val;
+            int otherCurrentElement = currentOther.val;
             if (thisCurrentElement != otherCurrentElement) {
                 return false;
             }
