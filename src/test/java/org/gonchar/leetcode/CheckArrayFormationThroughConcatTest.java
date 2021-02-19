@@ -43,4 +43,11 @@ class CheckArrayFormationThroughConcatTest {
         assertEquals(false, solution.canFormArray(arr, pieces));
     }
 
+    @Test
+    void canFormArrayEmptyInput() {
+        int arr[] = {};
+        int pieces[][] = {{}};
+        assertEquals(true, solution.canFormArray(arr, pieces));
+    }
+
 }
