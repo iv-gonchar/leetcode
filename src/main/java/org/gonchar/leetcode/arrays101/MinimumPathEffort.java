@@ -9,16 +9,15 @@ public class MinimumPathEffort {
 
     private Map<Integer, Cell> all = new HashMap<>();
 
-    private PriorityQueue<Cell> toCompute = new PriorityQueue<>(new CellComparator());
+    private PriorityQueue<Point> toCompute = new PriorityQueue<>(new PComparator());
 
     public int minimumEffortPath(int[][] heights) {
-        Cell start = all.computeIfAbsent(key(0, 0), k -> {
-            return new Cell(0, 0);
-        });
+        Cell start = all.computeIfAbsent(key(0, 0), k -> new Cell(0, 0));
         start.effort = 0;
-        toCompute.add(start);
+        toCompute.add(new Point(start));
         while (toCompute.size() != 0) {
-            Cell current = toCompute.poll();
+            Point point = toCompute.poll();
+            Cell current = all.get(point.key());
             if (isTarget(heights, current)) {
                 return current.effort;
             }
@@ -48,9 +47,7 @@ public class MinimumPathEffort {
         if (!isValidCell(heights, i, j)) {
             return;
         }
-        Cell neighbour = all.computeIfAbsent(key(i, j), k -> {
-            return new Cell(i, j);
-        });
+        Cell neighbour = all.computeIfAbsent(key(i, j), k -> new Cell(i, j));
         if (neighbour.computed) {
             return;
         }
@@ -58,13 +55,35 @@ public class MinimumPathEffort {
         effort = Math.max(effort, current.effort);
         if (effort < neighbour.effort) {
             neighbour.effort = effort;
-            toCompute.add(neighbour);
+            toCompute.add(new Point(neighbour));
+        }
+    }
+
+    public static class Point {
+        final int effort;
+        final byte row;
+        final byte col;
+
+        public Point(Cell cell) {
+            this.effort = cell.effort;
+            this.col = cell.col;
+            this.row = cell.row;
+        }
+
+        public int key() {
+            return 100 * row + col;
+        }
+    }
+
+    public static class PComparator implements Comparator<Point> {
+        public int compare(Point p1, Point p2) {
+            return p1.effort - p2.effort;
         }
     }
 
     public static class Cell {
-        byte row = 0;
-        byte col = 0;
+        byte row;
+        byte col;
         int effort = 1000001;
         boolean computed = false;
 
@@ -73,20 +92,8 @@ public class MinimumPathEffort {
             this.col = (byte) col;
         }
 
-//        public void updateEffort(int newEffort) {
-//            if (newEffort < this.effort) {
-//                this.effort = newEffort;
-//            }
-//        }
-
         public String toString() {
             return "[" + row + "," + col + "] ef=" + effort + ", c=" + computed;
-        }
-    }
-
-    public static class CellComparator implements Comparator<Cell> {
-        public int compare(Cell c1, Cell c2) {
-            return c1.effort - c2.effort;
         }
     }
 }
