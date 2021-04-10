@@ -25,7 +25,19 @@ class SortTest {
     void selectionSortTest() {
         Sort sort = new SelectionSort();
 
-        int[] array = factory.generate(400000, -50000, 100000);
+        int[] array = factory.generate(100000, -50000, 100000);
+        System.out.println("min=" + utils.min(array));
+        System.out.println("max=" + utils.max(array));
+
+        sort.sort(array);
+        assertTrue(utils.isAsc(array));
+    }
+
+    @Test
+    void bubbleSortTest() {
+        Sort sort = new BubbleSort();
+
+        int[] array = factory.generate(100000, -50000, 100000);
 //        System.out.println(utils.toString(array));
         System.out.println("min=" + utils.min(array));
         System.out.println("max=" + utils.max(array));
