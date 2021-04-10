@@ -45,7 +45,7 @@ class SortTest {
     void bubbleSortTest() {
         Sort sort = new BubbleSort();
 
-        int[] array = factory.generate(SIZE, MIN, MAX);
+        int[] array = factory.generate(50000, -50000, 50000);
 //        System.out.println(utils.toString(array));
         System.out.println("min=" + utils.min(array));
         System.out.println("max=" + utils.max(array));
@@ -74,6 +74,20 @@ class SortTest {
         Sort sort = new MergeSort();
 
         int[] array = factory.generate(10000000, 100 * MIN, 100 * MAX);
+//        System.out.println(utils.toString(array));
+        System.out.println("min=" + utils.min(array));
+        System.out.println("max=" + utils.max(array));
+
+        sort.sort(array);
+//        System.out.println(utils.toString(array));
+        assertTrue(utils.isAsc(array));
+    }
+
+    @Test
+    void quickSortTest() {
+        Sort sort = new QuickSort();
+
+        int[] array = factory.generate(100*SIZE, 100 * MIN, 100 * MAX);
 //        System.out.println(utils.toString(array));
         System.out.println("min=" + utils.min(array));
         System.out.println("max=" + utils.max(array));
