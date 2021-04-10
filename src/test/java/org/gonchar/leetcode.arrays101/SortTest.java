@@ -68,4 +68,18 @@ class SortTest {
 //        System.out.println(utils.toString(array));
         assertTrue(utils.isAsc(array));
     }
+
+    @Test
+    void mergeSortTest() {
+        Sort sort = new MergeSort();
+
+        int[] array = factory.generate(10000000, 100 * MIN, 100 * MAX);
+//        System.out.println(utils.toString(array));
+        System.out.println("min=" + utils.min(array));
+        System.out.println("max=" + utils.max(array));
+
+        sort.sort(array);
+//        System.out.println(utils.toString(array));
+        assertTrue(utils.isAsc(array));
+    }
 }
