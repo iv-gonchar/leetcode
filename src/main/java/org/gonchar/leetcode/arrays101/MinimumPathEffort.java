@@ -17,7 +17,7 @@ public class MinimumPathEffort {
         toCompute.add(new Point(start));
         while (toCompute.size() != 0) {
             Point point = toCompute.poll();
-            Cell current = all.get(point.key());
+            Cell current = point.cell;
             if (isTarget(heights, current)) {
                 return current.effort;
             }
@@ -61,17 +61,11 @@ public class MinimumPathEffort {
 
     public static class Point {
         final int effort;
-        final byte row;
-        final byte col;
+        final Cell cell;
 
         public Point(Cell cell) {
             this.effort = cell.effort;
-            this.col = cell.col;
-            this.row = cell.row;
-        }
-
-        public int key() {
-            return 100 * row + col;
+            this.cell = cell;
         }
     }
 
