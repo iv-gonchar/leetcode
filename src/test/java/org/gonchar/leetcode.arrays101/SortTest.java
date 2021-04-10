@@ -3,6 +3,7 @@ package org.gonchar.leetcode.arrays101;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SortTest {
 
@@ -18,5 +19,19 @@ class SortTest {
         System.out.println("max=" + utils.max(array));
         assertFalse(utils.isAsc(array));
         assertFalse(utils.isDesc(array));
+    }
+
+    @Test
+    void selectionSortTest() {
+        Sort sort = new SelectionSort();
+
+        int[] array = factory.generate(400000, -50000, 100000);
+//        System.out.println(utils.toString(array));
+        System.out.println("min=" + utils.min(array));
+        System.out.println("max=" + utils.max(array));
+
+        sort.sort(array);
+//        System.out.println(utils.toString(array));
+        assertTrue(utils.isAsc(array));
     }
 }
