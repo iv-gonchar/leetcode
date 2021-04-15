@@ -1,35 +1,30 @@
 package org.gonchar.leetcode.arrays101;
 
+import java.util.Arrays;
+
 public class Solution {
     public int lengthOfLIS(int[] nums) {
-        int[] sub = new int[nums.length];
-        int size = 0;
-        return findMax(0, sub, size, nums);
+        // [prev][curr]
+        int[][] memo = new int[nums.length+1][nums.length];
+        for(int i=0; i<memo.length; i++) {
+            Arrays.fill(memo[i], -1);
+        }
+        return maxLISLength(-1, 0, nums, memo);
     }
 
-    public int findMax(int curpos, int[] sub, int size, int[] nums) {
-        if (curpos >= nums.length) {
-            return size;
+    public int maxLISLength(int prev, int cur, int[] nums, int[][] memo) {
+        if (cur == nums.length) {
+            return 0;
         }
-        int current = nums[curpos];
-        if (size == 0) {
-            // include
-            sub[size++] = current;
-            int include = findMax(curpos + 1, sub, size, nums);
-            // not include
-            size--;
-            int notInclude = findMax(curpos + 1, sub, size, nums);
-            return Math.max(include, notInclude);
-        } else if (sub[size-1] < current) {
-            // include
-            sub[size++] = current;
-            int include = findMax(curpos + 1, sub, size, nums);
-            // not include
-            size--;
-            int notInclude = findMax(curpos + 1, sub, size, nums);
-            return Math.max(include, notInclude);
-        } else {
-            return findMax(curpos + 1, sub, size, nums);
+        if (memo[prev+1][cur] >= 0) {
+            return memo[prev+1][cur];
         }
+        int taken = 0;
+        if (prev == -1 || nums[cur] > nums[prev]) {
+            taken = 1 + maxLISLength(cur, cur + 1, nums, memo);
+        }
+        int notTaken = maxLISLength(prev, cur + 1, nums, memo);
+        memo[prev+1][cur] = Math.max(taken, notTaken);
+        return memo[prev+1][cur];
     }
 }
