@@ -23,7 +23,7 @@ public class Solution {
         return new int[]{notTaken, taken};
     }
 
-    public class TreeNode {
+    private static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
